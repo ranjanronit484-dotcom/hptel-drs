@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOTEL DRS DELUXE | Luxury Rooms, Banquet Halls & Grand Party Celebrations</title>
+  <meta name="description" content="Hotel DRS Deluxe offers luxury rooms across all categories, grand party halls for weddings, birthdays, anniversaries, corporate seminars, and fine dining. Call 8292749943.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              400: '#e5cb8f',
+              500: '#c5a059',
+              600: '#9f7d38',
+              700: '#7a5e26',
+            },
+            hotel: {
+              dark: '#0b1118',
+              surface: '#121c27',
+              card: '#182433',
+              cardLight: '#213042',
+              border: 'rgba(197, 160, 89, 0.25)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Luxury Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#0b1118] text-slate-100 antialiased selection:bg-gold-500 selection:text-black">
+
+  <!-- ==================== TOP ANNOUNCEMENT BAR ==================== -->
+  <div id="topAnnouncementBar" class="bg-gradient-to-r from-amber-700 via-yellow-600 to-amber-700 text-slate-950 font-medium text-xs md:text-sm py-2 px-4 shadow-md text-center flex items-center justify-between transition-all">
+    <div class="flex-1 flex items-center justify-center space-x-2">
+      <span class="inline-block animate-pulse"><i class="fa-solid fa-gift text-sm"></i></span>
+      <span id="announcementText">🎉 Welcome to HOTEL DRS DELUXE! Special discounts on Rooms & Party Hall bookings. Call 8292749943.</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-4 text-xs font-bold pl-4">
+      <a href="tel:8292749943" class="hover:underline flex items-center space-x-1"><i class="fa-solid fa-phone"></i> <span>+91 8292749943</span></a>
+      <a href="https://wa.me/918292749943" target="_blank" class="hover:underline flex items-center space-x-1"><i class="fa-brands fa-whatsapp"></i> <span>WhatsApp Desk</span></a>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN NAVIGATION ==================== -->
+  <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-11 h-11 rounded-lg gold-gradient-bg flex items-center justify-center text-slate-950 font-serif font-black text-xl shadow-lg shadow-gold-500/20 group-hover:scale-105 transition-transform">
+          DRS
+        </div>
+        <div>
+          <span class="block font-serif font-bold text-lg md:text-xl tracking-wider text-white group-hover:text-gold-400 transition">
+            HOTEL DRS DELUXE
+          </span>
+          <span class="block text-[10px] uppercase tracking-widest text-gold-500/90 font-semibold">
+            LUXURY STAY &amp; BANQUETS
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-300">
+        <a href="#home" class="hover:text-gold-400 transition">Home</a>
+        <a href="#rooms" class="hover:text-gold-400 transition">Rooms &amp; Suites</a>
+        <a href="#banquets" class="hover:text-gold-400 transition flex items-center gap-1">
+          <span>Party Halls &amp; Banquets</span>
+          <span class="text-[9px] bg-red-500/20 text-red-300 border border-red-500/40 px-1.5 py-0.2 rounded-full font-bold uppercase">Popular</span>
+        </a>
+        <a href="#dining" class="hover:text-gold-400 transition">Restaurant</a>
+        <a href="#amenities" class="hover:text-gold-400 transition">Amenities</a>
+        <a href="#gallery" class="hover:text-gold-400 transition">Gallery</a>
+        <a href="#contact" class="hover:text-gold-400 transition">Contact</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="hidden sm:flex items-center space-x-3">
+        <a href="https://wa.me/918292749943?text=Hi%20Hotel%20DRS%20Deluxe,%20I%20want%20to%20inquire%20about%20booking" target="_blank" class="px-3.5 py-2 rounded-lg bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600/30 border border-emerald-500/30 text-xs font-semibold flex items-center gap-2 transition">
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span>WhatsApp</span>
+        </a>
+        <button onclick="openBookingModal('room')" class="btn-gold px-4 py-2 rounded-lg text-xs font-bold tracking-wide flex items-center gap-1.5 shadow-md">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Book Now</span>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex sm:hidden items-center space-x-2">
+        <button id="mobileMenuBtn" class="text-gold-400 hover:text-white p-2 focus:outline-none">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-hotel-surface border-b border-hotel-border px-4 pt-2 pb-6 space-y-3">
+      <a href="#home" class="block py-2 text-sm text-slate-200 hover:text-gold-400">Home</a>
+      <a href="#rooms" class="block py-2 text-sm text-slate-200 hover:text-gold-400">Rooms &amp; Suites</a>
+      <a href="#banquets" class="block py-2 text-sm text-slate-200 hover:text-gold-400">Party Halls &amp; Banquets</a>
+      <a href="#dining" class="block py-2 text-sm text-slate-200 hover:text-gold-400">Restaurant</a>
+      <a href="#amenities" class="block py-2 text-sm text-slate-200 hover:text-gold-400">Amenities</a>
+      <a href="#gallery" class="block py-2 text-sm text-slate-200 hover:text-gold-400">Gallery</a>
+      <a href="#contact" class="block py-2 text-sm text-slate-200 hover:text-gold-400">Contact Us</a>
+      <div class="pt-3 border-t border-slate-800 flex flex-col gap-2">
+        <button onclick="openBookingModal('room')" class="w-full btn-gold py-2.5 rounded-lg text-xs font-bold text-center">
+          Book Room Online
+        </button>
+        <button onclick="openBookingModal('hall')" class="w-full btn-outline-gold py-2.5 rounded-lg text-xs font-bold text-center">
+          Book Party Hall / Banquet
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="home" class="relative min-h-[85vh] lg:min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <!-- Hero Background Image with Dark Vignette Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=2000&q=80" alt="Hotel DRS Deluxe Grand View" class="w-full h-full object-cover opacity-35 scale-105 transition-transform duration-1000 ease-out">
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0b1118] via-[#0b1118]/70 to-[#0b1118]/80"></div>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 pb-16">
+      
+      <!-- Stars & Pill -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs font-semibold mb-6 tracking-wide">
+        <div class="flex text-amber-400 text-xs gap-1">
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </div>
+        <span>PREMIER LUXURY &amp; PARTY DESTINATION</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6 leading-tight">
+        Welcome to <br class="hidden sm:inline">
+        <span class="gold-gradient-text">HOTEL DRS DELUXE</span>
+      </h1>
+
+      <p id="heroSubtitleText" class="max-w-2xl mx-auto text-sm sm:text-base lg:text-lg text-slate-300 font-light mb-10 leading-relaxed">
+        Experience grand hospitality with our collection of luxury rooms, multi-cuisine dining, and state-of-the-art banquet halls crafted for weddings, birthdays, anniversaries, and corporate celebrations.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-12">
+        <button onclick="openBookingModal('room')" class="btn-gold px-7 py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center gap-2">
+          <i class="fa-solid fa-bed"></i>
+          <span>Book Rooms</span>
+        </button>
+        <button onclick="openBookingModal('hall')" class="btn-outline-gold px-7 py-3.5 rounded-xl font-bold text-sm tracking-wide flex items-center gap-2 bg-hotel-surface/40">
+          <i class="fa-solid fa-champagne-glasses"></i>
+          <span>Book Party Hall</span>
+        </button>
+        <a href="tel:8292749943" class="px-5 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 text-sm font-semibold flex items-center gap-2 transition">
+          <i class="fa-solid fa-phone text-gold-400"></i>
+          <span>Call 8292749943</span>
+        </a>
+      </div>
+
+      <!-- Quick Highlights Bar -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="glass-panel p-4 rounded-xl text-center gold-border-glow transition">
+          <div class="text-gold-400 text-2xl font-serif font-bold mb-1">All Types</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider">Luxury Rooms &amp; Suites</div>
+        </div>
+        <div class="glass-panel p-4 rounded-xl text-center gold-border-glow transition">
+          <div class="text-gold-400 text-2xl font-serif font-bold mb-1">600+ Cap</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider">Grand Banquet &amp; Hall</div>
+        </div>
+        <div class="glass-panel p-4 rounded-xl text-center gold-border-glow transition">
+          <div class="text-gold-400 text-2xl font-serif font-bold mb-1">All Events</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider">Weddings &amp; Birthday Parties</div>
+        </div>
+        <div class="glass-panel p-4 rounded-xl text-center gold-border-glow transition">
+          <div class="text-gold-400 text-2xl font-serif font-bold mb-1">24/7</div>
+          <div class="text-xs text-slate-400 uppercase tracking-wider">Room Service &amp; Dining</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== QUICK SEARCH & BOOKING BAR ==================== -->
+  <section class="relative z-20 -mt-8 max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="glass-panel p-5 sm:p-6 rounded-2xl shadow-2xl border border-gold-500/30 bg-[#121c27]/95">
+      <form id="heroQuickSearchForm" onsubmit="handleQuickSearch(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
+        
+        <!-- Reservation Type -->
+        <div>
+          <label class="block text-xs font-semibold text-gold-400 uppercase tracking-wider mb-1.5">Looking For</label>
+          <div class="relative">
+            <select id="quickType" onchange="toggleQuickSearchFields()" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none appearance-none">
+              <option value="room">🏨 Room Stay</option>
+              <option value="hall">🎉 Banquet &amp; Party Hall</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-3 top-3.5 text-slate-400 text-[10px] pointer-events-none"></i>
+          </div>
+        </div>
+
+        <!-- Date Field (Check In or Event Date) -->
+        <div>
+          <label id="quickDateLabel" class="block text-xs font-semibold text-gold-400 uppercase tracking-wider mb-1.5">Check-In Date</label>
+          <input type="date" id="quickDate" required class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <!-- Secondary Date (Check Out or Event Type) -->
+        <div id="quickCheckOutContainer">
+          <label class="block text-xs font-semibold text-gold-400 uppercase tracking-wider mb-1.5">Check-Out Date</label>
+          <input type="date" id="quickCheckOut" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <!-- Guests / Capacity -->
+        <div>
+          <label id="quickGuestsLabel" class="block text-xs font-semibold text-gold-400 uppercase tracking-wider mb-1.5">Total Guests</label>
+          <div class="relative">
+            <input type="number" id="quickGuests" min="1" value="2" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button type="submit" class="w-full btn-gold py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-lg">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Check Availability</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- ==================== ROOMS & SUITES SECTION ==================== -->
+  <section id="rooms" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Luxurious Accommodations</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
+        Our Signature Rooms &amp; Suites
+      </h2>
+      <div class="w-16 h-1 gold-gradient-bg mx-auto rounded-full mb-4"></div>
+      <p class="text-slate-400 text-sm sm:text-base">
+        Discover rooms curated for maximum comfort, modern elegance, and quiet luxury. Every room features air-conditioning, high-speed Wi-Fi, and 24-hour dedicated room service.
+      </p>
+
+      <!-- Room Category Filter Tabs -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-8" id="roomCategoryFilters">
+        <button onclick="filterRooms('All')" class="category-btn active px-4 py-2 rounded-lg text-xs font-semibold transition bg-gold-500 text-black">All Rooms</button>
+        <button onclick="filterRooms('Deluxe')" class="category-btn px-4 py-2 rounded-lg text-xs font-semibold transition bg-hotel-card text-slate-300 hover:text-white hover:bg-hotel-cardLight">Deluxe</button>
+        <button onclick="filterRooms('Super Deluxe')" class="category-btn px-4 py-2 rounded-lg text-xs font-semibold transition bg-hotel-card text-slate-300 hover:text-white hover:bg-hotel-cardLight">Super Deluxe</button>
+        <button onclick="filterRooms('Executive Suite')" class="category-btn px-4 py-2 rounded-lg text-xs font-semibold transition bg-hotel-card text-slate-300 hover:text-white hover:bg-hotel-cardLight">Executive Suite</button>
+        <button onclick="filterRooms('Presidential')" class="category-btn px-4 py-2 rounded-lg text-xs font-semibold transition bg-hotel-card text-slate-300 hover:text-white hover:bg-hotel-cardLight">Presidential Suite</button>
+        <button onclick="filterRooms('Family Suite')" class="category-btn px-4 py-2 rounded-lg text-xs font-semibold transition bg-hotel-card text-slate-300 hover:text-white hover:bg-hotel-cardLight">Family Suite</button>
+      </div>
+    </div>
+
+    <!-- Rooms Dynamic Grid -->
+    <div id="roomsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Injected by JavaScript -->
+      <div class="col-span-full py-12 text-center text-slate-400">
+        <i class="fa-solid fa-spinner fa-spin text-2xl text-gold-500 mb-2"></i>
+        <p>Loading rooms...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== BANQUET & PARTY ARRANGEMENTS SECTION ==================== -->
+  <section id="banquets" class="py-20 bg-[#0e1620] border-y border-hotel-border relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-red-300 text-xs font-semibold mb-3">
+          <i class="fa-solid fa-champagne-glasses"></i>
+          <span>WEDDINGS • BIRTHDAYS • CORPORATE • RECEPTIONS</span>
+        </div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1 mb-4">
+          Party Halls &amp; Grand Celebrations
+        </h2>
+        <div class="w-16 h-1 gold-gradient-bg mx-auto rounded-full mb-4"></div>
+        <p class="text-slate-300 text-sm sm:text-base">
+          From extravagant wedding receptions to high-energy birthday parties, anniversaries, corporate seminars, and open-air rooftop DJ nights — Hotel DRS Deluxe offers full event arrangements, theme decoration, JBL sound, and bespoke catering.
+        </p>
+      </div>
+
+      <!-- Party Arrangements Highlight Features -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-12">
+        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+          <div class="w-10 h-10 mx-auto rounded-full bg-gold-500/10 text-gold-400 flex items-center justify-center text-base mb-2">
+            <i class="fa-solid fa-ring"></i>
+          </div>
+          <div class="text-xs font-bold text-white">Weddings</div>
+          <div class="text-[10px] text-slate-400">Grand Mandap &amp; Stage</div>
+        </div>
+        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+          <div class="w-10 h-10 mx-auto rounded-full bg-gold-500/10 text-gold-400 flex items-center justify-center text-base mb-2">
+            <i class="fa-solid fa-cake-candles"></i>
+          </div>
+          <div class="text-xs font-bold text-white">Birthday Bashes</div>
+          <div class="text-[10px] text-slate-400">Balloons &amp; DJ Lights</div>
+        </div>
+        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+          <div class="w-10 h-10 mx-auto rounded-full bg-gold-500/10 text-gold-400 flex items-center justify-center text-base mb-2">
+            <i class="fa-solid fa-glass-cheers"></i>
+          </div>
+          <div class="text-xs font-bold text-white">Anniversaries</div>
+          <div class="text-[10px] text-slate-400">Romantic Ambiance</div>
+        </div>
+        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+          <div class="w-10 h-10 mx-auto rounded-full bg-gold-500/10 text-gold-400 flex items-center justify-center text-base mb-2">
+            <i class="fa-solid fa-briefcase"></i>
+          </div>
+          <div class="text-xs font-bold text-white">Corporate Meets</div>
+          <div class="text-[10px] text-slate-400">4K Projector &amp; AV</div>
+        </div>
+        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+          <div class="w-10 h-10 mx-auto rounded-full bg-gold-500/10 text-gold-400 flex items-center justify-center text-base mb-2">
+            <i class="fa-solid fa-music"></i>
+          </div>
+          <div class="text-xs font-bold text-white">DJ &amp; Sound</div>
+          <div class="text-[10px] text-slate-400">Concert-Grade Audio</div>
+        </div>
+        <div class="glass-panel p-3.5 rounded-xl text-center border-slate-800">
+          <div class="w-10 h-10 mx-auto rounded-full bg-gold-500/10 text-gold-400 flex items-center justify-center text-base mb-2">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div class="text-xs font-bold text-white">Royal Catering</div>
+          <div class="text-[10px] text-slate-400">Multi-Cuisine Buffet</div>
+        </div>
+      </div>
+
+      <!-- Halls Dynamic Grid -->
+      <div id="hallsGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <!-- Injected by JavaScript -->
+        <div class="col-span-full py-12 text-center text-slate-400">
+          <i class="fa-solid fa-spinner fa-spin text-2xl text-gold-500 mb-2"></i>
+          <p>Loading party halls &amp; banquet spaces...</p>
+        </div>
+      </div>
+
+      <!-- Popular Event Packages -->
+      <div class="mt-14">
+        <h3 class="font-serif text-2xl font-bold text-center text-white mb-8">
+          Curated Celebration Packages
+        </h3>
+        <div id="packagesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Injected by JavaScript -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== RESTAURANT & DINING ==================== -->
+  <section id="dining" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Exquisite Gastronomy</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-2 mb-6">
+          The DRS Spice &amp; Grill Restaurant
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base mb-6 leading-relaxed">
+          Embark on a culinary journey featuring authentic North Indian delicacies, Mughlai sizzlers, Chinese wok preparations, and Continental specialties prepared by master chefs using handpicked ingredients.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 mb-8">
+          <div class="p-4 rounded-xl bg-hotel-card border border-slate-800">
+            <i class="fa-solid fa-bowl-food text-gold-400 text-xl mb-2"></i>
+            <h4 class="text-sm font-bold text-white">Multi-Cuisine Menu</h4>
+            <p class="text-xs text-slate-400">Vegetarian &amp; Non-Vegetarian delicacies</p>
+          </div>
+          <div class="p-4 rounded-xl bg-hotel-card border border-slate-800">
+            <i class="fa-solid fa-clock text-gold-400 text-xl mb-2"></i>
+            <h4 class="text-sm font-bold text-white">24/7 In-Room Dining</h4>
+            <p class="text-xs text-slate-400">Hot meals delivered straight to your room</p>
+          </div>
+          <div class="p-4 rounded-xl bg-hotel-card border border-slate-800">
+            <i class="fa-solid fa-utensils text-gold-400 text-xl mb-2"></i>
+            <h4 class="text-sm font-bold text-white">Live Party Buffet</h4>
+            <p class="text-xs text-slate-400">Tailored catering menus for weddings &amp; parties</p>
+          </div>
+          <div class="p-4 rounded-xl bg-hotel-card border border-slate-800">
+            <i class="fa-solid fa-mug-hot text-gold-400 text-xl mb-2"></i>
+            <h4 class="text-sm font-bold text-white">Complimentary Breakfast</h4>
+            <p class="text-xs text-slate-400">Fresh buffet with Super Deluxe &amp; Suites</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <a href="tel:8292749943" class="btn-gold px-6 py-3 rounded-xl text-xs font-bold tracking-wide flex items-center gap-2">
+            <i class="fa-solid fa-phone"></i>
+            <span>Order Food / Reserve Table</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="space-y-4">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior" class="rounded-2xl shadow-xl w-full h-52 object-cover border border-hotel-border">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Gourmet Platter" class="rounded-2xl shadow-xl w-full h-64 object-cover border border-hotel-border">
+        </div>
+        <div class="space-y-4 pt-8">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Fine Dining setup" class="rounded-2xl shadow-xl w-full h-64 object-cover border border-hotel-border">
+          <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80" alt="Celebration Buffet" class="rounded-2xl shadow-xl w-full h-52 object-cover border border-hotel-border">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== HOTEL AMENITIES ==================== -->
+  <section id="amenities" class="py-20 bg-[#0e1620] border-t border-hotel-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-gold-500">World-Class Facilities</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
+          Everything You Need for a Seamless Stay
+        </h2>
+        <div class="w-16 h-1 gold-gradient-bg mx-auto rounded-full mb-4"></div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="glass-panel p-6 rounded-2xl gold-border-glow transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-wifi"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">High-Speed Wi-Fi</h4>
+          <p class="text-xs text-slate-400">100+ Mbps uninterrupted optical fiber connectivity across all rooms &amp; halls.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl gold-border-glow transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">100% Power Backup</h4>
+          <p class="text-xs text-slate-400">Heavy-duty silent generator setup ensuring zero blackout during stays &amp; parties.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl gold-border-glow transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-square-parking"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">Valet Parking</h4>
+          <p class="text-xs text-slate-400">Secure parking space with 24/7 CCTV surveillance and valet assistance.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl gold-border-glow transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-bell-concierge"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">24/7 Concierge</h4>
+          <p class="text-xs text-slate-400">Dedicated desk for local tours, taxi booking, and guest assistance round-the-clock.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl gold-border-glow transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-temperature-arrow-up"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">Hot &amp; Cold Water</h4>
+          <p class="text-xs text-slate-400">Instant geyser hot water in all attached luxury bathrooms.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl gold-border-glow transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-shirt"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">Express Laundry</h4>
+          <p class="text-xs text-slate-400">Same-day professional washing and steam press service for all guests.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl gold-border-glow transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">Security &amp; CCTV</h4>
+          <p class="text-xs text-slate-400">Comprehensive security personnel and high-definition camera monitoring.</p>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl gold-border-glow transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-xl mb-4">
+            <i class="fa-solid fa-user-doctor"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">Doctor on Call</h4>
+          <p class="text-xs text-slate-400">Prompt medical assistance and first-aid facilities available 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PHOTO GALLERY ==================== -->
+  <section id="gallery" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-10">
+      <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Visual Tour</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
+        Moments at Hotel DRS Deluxe
+      </h2>
+      <div class="w-16 h-1 gold-gradient-bg mx-auto rounded-full mb-4"></div>
+      
+      <!-- Gallery Category Filters -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mt-6" id="galleryCategoryFilters">
+        <button onclick="filterGallery('All')" class="gal-cat-btn active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-gold-500 text-black transition">All Photos</button>
+        <button onclick="filterGallery('Rooms')" class="gal-cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-hotel-card text-slate-300 hover:text-white transition">Rooms</button>
+        <button onclick="filterGallery('Party Halls')" class="gal-cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-hotel-card text-slate-300 hover:text-white transition">Party Halls &amp; Banquets</button>
+        <button onclick="filterGallery('Dining')" class="gal-cat-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-hotel-card text-slate-300 hover:text-white transition">Dining &amp; Lobby</button>
+      </div>
+    </div>
+
+    <div id="dynamicGalleryGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <!-- Injected by JavaScript from /api/gallery -->
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="py-20 bg-[#0e1620] border-t border-hotel-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Guest Feedback</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-2 mb-4">
+          What Our Guests Say
+        </h2>
+        <div class="w-16 h-1 gold-gradient-bg mx-auto rounded-full mb-4"></div>
+      </div>
+
+      <div id="testimonialsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Injected by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT & LOCATION ==================== -->
+  <section id="contact" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      
+      <!-- Contact Information -->
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Get In Touch</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-2 mb-6">
+          Contact HOTEL DRS DELUXE
+        </h2>
+        <p class="text-slate-300 text-sm mb-8">
+          Have questions about room availability, banquet dates, wedding packages, or custom catering? Reach out directly to our reservations desk.
+        </p>
+
+        <div class="space-y-6">
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center shrink-0 text-lg border border-gold-500/20">
+              <i class="fa-solid fa-phone-volume"></i>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Direct Phone / Booking No</div>
+              <a href="tel:8292749943" class="text-lg font-bold text-white hover:text-gold-400 transition">+91 8292749943</a>
+              <div class="text-xs text-emerald-400 mt-0.5"><i class="fa-solid fa-circle text-[8px] mr-1"></i> Available 24 Hours</div>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 text-lg border border-emerald-500/20">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Instant WhatsApp Chat</div>
+              <a href="https://wa.me/918292749943?text=Hi%20Hotel%20DRS%20Deluxe,%20I%20want%20to%20book%20a%20room/hall" target="_blank" class="text-lg font-bold text-white hover:text-emerald-400 transition">+91 8292749943</a>
+              <div class="text-xs text-slate-400 mt-0.5">Instant booking confirmation via WhatsApp</div>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center shrink-0 text-lg border border-gold-500/20">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Address</div>
+              <div id="contactAddressText" class="text-sm font-medium text-slate-200">
+                Station Road, Near City Center, Hotel DRS Deluxe
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-start space-x-4">
+            <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center shrink-0 text-lg border border-gold-500/20">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div>
+              <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Check-In / Check-Out</div>
+              <div class="text-sm font-medium text-slate-200">
+                Check-In: <span id="checkInInfo" class="text-gold-400 font-bold">12:00 PM</span> &nbsp;|&nbsp; 
+                Check-Out: <span id="checkOutInfo" class="text-gold-400 font-bold">11:00 AM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Google Maps Location Button Only -->
+          <div class="mt-6 p-4 sm:p-5 rounded-2xl bg-hotel-card border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xl">
+            <div class="flex items-center space-x-3.5">
+              <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center shrink-0 text-xl border border-gold-500/20">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-white">Find Us on Google Maps</h4>
+                <p id="mapAddressSnippet" class="text-xs text-slate-400">Click below to open GPS live route &amp; directions.</p>
+              </div>
+            </div>
+            <a id="googleMapsLocationBtn" href="https://maps.google.com/?q=Hotel+DRS+Deluxe+Station+Road" target="_blank" class="w-full sm:w-auto btn-gold px-6 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition">
+              <i class="fa-solid fa-diamond-turn-right text-sm"></i>
+              <span>Open in Google Maps</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Inquiry Form -->
+      <div class="glass-panel p-8 rounded-2xl border border-gold-500/30">
+        <h3 class="font-serif text-xl font-bold text-white mb-2">Send an Instant Inquiry</h3>
+        <p class="text-xs text-slate-400 mb-6">Our reservations manager will respond within 15 minutes.</p>
+
+        <form onsubmit="handleContactInquiry(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Your Name *</label>
+            <input type="text" id="contactName" required placeholder="Enter your full name" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Mobile Number *</label>
+              <input type="tel" id="contactPhone" required placeholder="10-digit mobile number" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Requirement *</label>
+              <select id="contactRequirement" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+                <option value="Room Booking">Hotel Room Stay</option>
+                <option value="Wedding / Reception Hall">Wedding / Reception Hall</option>
+                <option value="Birthday Party Celebration">Birthday Party Hall</option>
+                <option value="Corporate Event / Conference">Corporate Meeting / Conference</option>
+                <option value="Rooftop Party Arrangement">Rooftop Terrace Party</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Message or Special Requirements</label>
+            <textarea id="contactMessage" rows="3" placeholder="Tell us dates, number of guests, catering requirements..." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full btn-gold py-3 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Submit Inquiry</span>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-[#070b10] border-t border-slate-800 text-slate-400 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        
+        <!-- Brand Info -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded gold-gradient-bg flex items-center justify-center text-slate-950 font-serif font-black text-sm">
+              DRS
+            </div>
+            <span class="font-serif font-bold text-white tracking-wider">HOTEL DRS DELUXE</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            The premier hospitality and event venue featuring luxurious rooms across all tiers, bespoke party halls for weddings and birthdays, and 24/7 service.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-gold-400 mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#rooms" class="hover:text-white transition">All Rooms &amp; Suites</a></li>
+            <li><a href="#banquets" class="hover:text-white transition">Party Halls &amp; Banquets</a></li>
+            <li><a href="#dining" class="hover:text-white transition">Restaurant &amp; Dining</a></li>
+            <li><a href="#amenities" class="hover:text-white transition">Hotel Amenities</a></li>
+            <li><a href="#gallery" class="hover:text-white transition">Photo Gallery</a></li>
+            <li><a href="/admin" class="text-gold-400 hover:text-white font-semibold transition flex items-center gap-1.5"><i class="fa-solid fa-lock text-[10px]"></i> Official Portal</a></li>
+          </ul>
+        </div>
+
+        <!-- Event Types -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-gold-400 mb-4">Party Arrangements</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#banquets" class="hover:text-white transition">Royal Wedding Banquets</a></li>
+            <li><a href="#banquets" class="hover:text-white transition">Kids &amp; Adult Birthday Bashes</a></li>
+            <li><a href="#banquets" class="hover:text-white transition">Anniversaries &amp; Ring Ceremonies</a></li>
+            <li><a href="#banquets" class="hover:text-white transition">Corporate Conferences &amp; Seminars</a></li>
+            <li><a href="#banquets" class="hover:text-white transition">Skyline Open-Air Terrace DJ Nights</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer Assistance -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-widest text-gold-400 mb-4">Customer Desk &amp; Inquiries</h4>
+          <div class="space-y-2 text-xs">
+            <p><i class="fa-solid fa-phone text-gold-400 mr-2"></i> +91 8292749943</p>
+            <p><i class="fa-brands fa-whatsapp text-emerald-400 mr-2"></i> 8292749943</p>
+            <p><i class="fa-solid fa-envelope text-gold-400 mr-2"></i> booking@hoteldrsdeluxe.com</p>
+            <div class="pt-2 text-slate-400 text-[11px]">
+              Available 24 hours for room reservations, banquet booking, and banquet catering inquiries.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+        <p>&copy; 2026 HOTEL DRS DELUXE. All rights reserved.</p>
+        <p class="text-[11px] text-slate-600">Luxury Hospitality &amp; Grand Party Celebrations</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING WHATSAPP BUTTON ==================== -->
+  <a href="https://wa.me/918292749943?text=Hi%20Hotel%20DRS%20Deluxe,%20I%20am%20interested%20in%20booking%20a%20room/hall" target="_blank" class="whatsapp-float fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center text-2xl shadow-2xl hover:scale-110 transition duration-300" title="Chat with us on WhatsApp (8292749943)">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ==================== ROOM BOOKING MODAL ==================== -->
+  <div id="roomBookingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal-overlay">
+    <div class="bg-hotel-surface border border-gold-500/30 rounded-2xl max-w-lg w-full p-6 sm:p-8 modal-content max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+        <div>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-gold-500">Room Reservation</span>
+          <h3 id="modalRoomTitle" class="font-serif text-xl font-bold text-white">Book Your Luxury Stay</h3>
+        </div>
+        <button onclick="closeModal('roomBookingModal')" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form onsubmit="submitRoomBooking(event)" class="space-y-4">
+        <input type="hidden" id="bookingRoomId">
+        
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Selected Room</label>
+          <input type="text" id="bookingRoomDisplay" readonly class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-gold-400 font-bold focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Check-In Date *</label>
+            <input type="date" id="bookCheckIn" required class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Check-Out Date *</label>
+            <input type="date" id="bookCheckOut" required class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Number of Guests</label>
+            <input type="number" id="bookGuests" min="1" max="10" value="2" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Number of Rooms</label>
+            <input type="number" id="bookRoomsCount" min="1" max="5" value="1" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Full Name *</label>
+          <input type="text" id="bookGuestName" required placeholder="e.g. Ramesh Kumar" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Mobile Number *</label>
+            <input type="tel" id="bookPhone" required placeholder="10-digit mobile" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Email Address</label>
+            <input type="email" id="bookEmail" placeholder="your@email.com" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Special Requests (Optional)</label>
+          <textarea id="bookRequests" rows="2" placeholder="Early check-in, extra bed, high floor preference..." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-white focus:border-gold-500 focus:outline-none"></textarea>
+        </div>
+
+        <!-- Price Summary Box -->
+        <div class="p-3.5 rounded-xl bg-[#182433] border border-slate-800 flex items-center justify-between text-xs">
+          <div>
+            <span class="text-slate-400">Estimated Total:</span>
+            <div id="bookingEstimatedTotal" class="text-lg font-bold text-gold-400 font-serif">₹2,199 / night</div>
+          </div>
+          <span class="text-[10px] text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-1 rounded">Pay at Hotel / Instant Reserve</span>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="submit" class="flex-1 btn-gold py-3 rounded-lg text-xs font-bold uppercase tracking-wider">
+            Confirm Reservation
+          </button>
+          <button type="button" onclick="bookViaWhatsApp()" class="px-4 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 transition">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span>WhatsApp</span>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ==================== PARTY HALL / BANQUET INQUIRY MODAL ==================== -->
+  <div id="hallBookingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal-overlay">
+    <div class="bg-hotel-surface border border-gold-500/30 rounded-2xl max-w-lg w-full p-6 sm:p-8 modal-content max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+        <div>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-gold-500">Party &amp; Banquet Booking</span>
+          <h3 id="modalHallTitle" class="font-serif text-xl font-bold text-white">Plan Your Grand Celebration</h3>
+        </div>
+        <button onclick="closeModal('hallBookingModal')" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form onsubmit="submitHallBooking(event)" class="space-y-4">
+        <input type="hidden" id="bookingHallId">
+        
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Selected Banquet / Hall</label>
+          <select id="bookingHallSelect" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+            <!-- Dynamically populated -->
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Event Type *</label>
+            <select id="hallEventType" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+              <option value="Weddings & Reception">Weddings &amp; Reception</option>
+              <option value="Birthday Party">Birthday Party</option>
+              <option value="Anniversary Celebration">Anniversary Celebration</option>
+              <option value="Ring Ceremony / Engagement">Ring Ceremony / Engagement</option>
+              <option value="Corporate Meeting & Seminar">Corporate Seminar / Meeting</option>
+              <option value="Kitty Party / Family Get-Together">Kitty Party / Family Gathering</option>
+              <option value="Rooftop DJ & Musical Night">Rooftop DJ / Musical Night</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Event Date *</label>
+            <input type="date" id="hallEventDate" required class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Expected Guests *</label>
+            <input type="number" id="hallGuestsCount" min="10" max="1000" value="100" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Food / Catering</label>
+            <select id="hallFoodPreference" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+              <option value="Pure Veg Buffet">Pure Veg Buffet</option>
+              <option value="Veg & Non-Veg Deluxe Buffet" selected>Veg &amp; Non-Veg Deluxe Buffet</option>
+              <option value="Hi-Tea & Snacks Only">Hi-Tea &amp; Snacks Only</option>
+              <option value="Only Hall (Client Catering)">Only Hall Booking</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Contact Person Name *</label>
+          <input type="text" id="hallContactName" required placeholder="Your full name" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Mobile Number *</label>
+            <input type="tel" id="hallContactPhone" required placeholder="10-digit mobile" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Email (Optional)</label>
+            <input type="email" id="hallContactEmail" placeholder="your@email.com" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Decoration, Sound or Special Arrangements</label>
+          <textarea id="hallSpecialRequests" rows="2" placeholder="Theme balloons, DJ requirement, stage flower decor..." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2 text-xs text-white focus:border-gold-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="submit" class="flex-1 btn-gold py-3 rounded-lg text-xs font-bold uppercase tracking-wider">
+            Submit Hall Inquiry
+          </button>
+          <button type="button" onclick="inquireHallViaWhatsApp()" class="px-4 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 transition">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span>WhatsApp</span>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ==================== BOOKING CONFIRMATION PASS / INVOICE MODAL ==================== -->
+  <div id="bookingInvoiceModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal-overlay">
+    <div class="bg-hotel-surface border border-gold-500/40 rounded-2xl max-w-md w-full p-6 modal-content text-left shadow-2xl">
+      <div id="printableInvoice" class="bg-[#121c27] p-6 rounded-xl border border-slate-700 text-slate-100">
+        
+        <!-- Pass Header -->
+        <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-4">
+          <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded gold-gradient-bg flex items-center justify-center text-slate-950 font-serif font-black text-xs">DRS</div>
+            <div>
+              <div class="font-serif font-bold text-sm text-white">HOTEL DRS DELUXE</div>
+              <div class="text-[9px] text-gold-400 font-semibold tracking-wider uppercase">Official Reservation Slip</div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div id="invBookingId" class="text-xs font-bold text-gold-400 font-mono">BK-0000</div>
+            <div id="invDate" class="text-[9px] text-slate-400">Date</div>
+          </div>
+        </div>
+
+        <!-- Details Grid -->
+        <div class="space-y-2 text-xs mb-4">
+          <div class="flex justify-between py-1 border-b border-slate-800">
+            <span class="text-slate-400">Guest Name:</span>
+            <span id="invGuestName" class="font-bold text-white">-</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800">
+            <span class="text-slate-400">Contact Mobile:</span>
+            <span id="invPhone" class="font-mono text-slate-200">-</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800">
+            <span class="text-slate-400">Reserved Service:</span>
+            <span id="invItemTitle" class="font-bold text-gold-400 text-right">-</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800">
+            <span class="text-slate-400">Check-In / Event Date:</span>
+            <span id="invDates" class="text-white">-</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-slate-800">
+            <span class="text-slate-400">Guests / Units:</span>
+            <span id="invGuests" class="text-slate-200">-</span>
+          </div>
+          <div class="flex justify-between py-1 pt-2 text-sm font-bold">
+            <span class="text-gold-400">Total Estimate:</span>
+            <span id="invAmount" class="text-gold-400 font-serif text-base">-</span>
+          </div>
+        </div>
+
+        <div class="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-400 flex items-center gap-2 mb-4">
+          <i class="fa-solid fa-circle-check text-xs"></i>
+          <span>Reservation Recorded • Present this slip at Front Desk</span>
+        </div>
+
+        <div class="text-center text-[10px] text-slate-400">
+          Support: +91 8292749943 | WhatsApp: 8292749943
+        </div>
+      </div>
+
+      <div class="mt-4 flex gap-2">
+        <button onclick="window.print()" class="flex-1 btn-gold py-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5">
+          <i class="fa-solid fa-print"></i>
+          <span>Print Receipt</span>
+        </button>
+        <button onclick="closeModal('bookingInvoiceModal')" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs & Client Config -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <!-- Client Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,487 @@
+{
+  "settings": {
+    "name": "HOTEL DRS DELUXE",
+    "tagline": "Luxury Living, Grand Celebrations & Unmatched Hospitality",
+    "phone": "8292749943",
+    "phoneSecondary": "+91 8292749943",
+    "whatsapp": "8292749943",
+    "email": "booking@hoteldrsdeluxe.com",
+    "address": "Station Road, Near City Center, Hotel DRS Deluxe",
+    "checkInTime": "12:00 PM",
+    "checkOutTime": "11:00 AM",
+    "announcement": "🎉 Welcome to HOTEL DRS DELUXE! Book rooms or party halls now for exclusive discounts. For instant reservation call 8292749943.",
+    "currency": "₹",
+    "theme": "royal-gold",
+    "goldStyle": "champagne",
+    "headingFont": "Cinzel",
+    "bodyFont": "Plus Jakarta Sans",
+    "googleMapsUrl": "https://maps.google.com/?q=Hotel+DRS+Deluxe+Station+Road",
+    "mapEmbedUrl": "https://maps.google.com/maps?q=Hotel+DRS+Deluxe+Station+Road&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    "mapDirectionsUrl": "https://www.google.com/maps/search/?api=1&query=Hotel+DRS+Deluxe+Station+Road",
+    "adminLoginNo": "8292749943",
+    "adminPassword": "admin",
+    "heroSubtitle": "Experience unmatched luxury with our premium rooms, multi-cuisine dining, and magnificent halls designed for weddings, birthdays, and grand parties."
+  },
+  "rooms": [
+    {
+      "id": "room-101",
+      "title": "Deluxe Room",
+      "category": "Deluxe",
+      "price": 2199,
+      "originalPrice": 2799,
+      "bedType": "King Size Bed",
+      "maxGuests": 2,
+      "size": "280 sq.ft",
+      "view": "City View",
+      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=80",
+      "amenities": [
+        "Air Conditioning",
+        "Free High-Speed Wi-Fi",
+        "43-inch Smart TV",
+        "Hot & Cold Water",
+        "24/7 Room Service",
+        "Complimentary Toiletries",
+        "Tea/Coffee Maker"
+      ],
+      "description": "Our elegantly designed Deluxe Room offers a restful retreat with contemporary furnishings, plush king-size bedding, and modern en-suite bath.",
+      "status": "Available",
+      "featured": true
+    },
+    {
+      "id": "room-102",
+      "title": "Super Deluxe Room",
+      "category": "Super Deluxe",
+      "price": 2999,
+      "originalPrice": 3799,
+      "bedType": "Premium King Bed",
+      "maxGuests": 3,
+      "size": "360 sq.ft",
+      "view": "Panoramic City View",
+      "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
+      "amenities": [
+        "Private Balcony",
+        "Air Conditioning",
+        "Complimentary Breakfast",
+        "50-inch 4K TV",
+        "Mini Fridge",
+        "Workstation Desk",
+        "24/7 In-Room Dining"
+      ],
+      "description": "Spacious and luxurious, the Super Deluxe Room features an attached private balcony, cozy seating area, complimentary breakfast, and premium bathroom amenities.",
+      "status": "Available",
+      "featured": true
+    },
+    {
+      "id": "room-103",
+      "title": "Executive Business Suite",
+      "category": "Executive Suite",
+      "price": 3999,
+      "originalPrice": 4999,
+      "bedType": "King Bed + Sofa Bed",
+      "maxGuests": 3,
+      "size": "450 sq.ft",
+      "view": "Skyline View",
+      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+      "amenities": [
+        "Executive Work Desk",
+        "Ergonomic Chair",
+        "Separate Living Lounge",
+        "High-Speed Wi-Fi (100 Mbps)",
+        "Mini Bar",
+        "Express Laundry",
+        "Welcome Drinks"
+      ],
+      "description": "Tailored for business executives and discerning travelers, combining a productive workstation with a plush lounge and luxury sleeping quarters.",
+      "status": "Available",
+      "featured": true
+    },
+    {
+      "id": "room-104",
+      "title": "Royal Presidential Suite",
+      "category": "Presidential",
+      "price": 6499,
+      "originalPrice": 8499,
+      "bedType": "Emperor King Bed",
+      "maxGuests": 4,
+      "size": "650 sq.ft",
+      "view": "Panoramic Landmark View",
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=80",
+      "amenities": [
+        "Jacuzzi Bath Tub",
+        "Separate Master Bedroom",
+        "Dining Room & Pantry",
+        "Dedicated Butler Service",
+        "65-inch OLED Home Theater",
+        "Free Minibar",
+        "Luxury Bathrobes"
+      ],
+      "description": "The pinnacle of opulence at Hotel DRS Deluxe. Features a private master suite, extravagant jacuzzi bathroom, separate dining salon, and personalized butler service.",
+      "status": "Available",
+      "featured": true
+    },
+    {
+      "id": "room-105",
+      "title": "Family Luxury Suite",
+      "category": "Family Suite",
+      "price": 4699,
+      "originalPrice": 5899,
+      "bedType": "Two Double Queen Beds",
+      "maxGuests": 5,
+      "size": "520 sq.ft",
+      "view": "Garden & City View",
+      "image": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
+      "amenities": [
+        "Two Queen Beds",
+        "Kid-Friendly Setup",
+        "Spacious Wardrobe",
+        "Double Vanity Bathroom",
+        "Interconnected Sitting Room",
+        "Family Dining Table",
+        "High-Speed Wi-Fi"
+      ],
+      "description": "Generously proportioned family haven with two plush queen beds, expansive wardrobe space, and ample room for the whole family to relax in comfort.",
+      "status": "Available",
+      "featured": false
+    },
+    {
+      "id": "room-106",
+      "title": "Standard Classic Room",
+      "category": "Classic",
+      "price": 1699,
+      "originalPrice": 2199,
+      "bedType": "Queen Size Bed",
+      "maxGuests": 2,
+      "size": "220 sq.ft",
+      "view": "Courtyard View",
+      "image": "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80",
+      "amenities": [
+        "Air Conditioning",
+        "En-suite Bathroom",
+        "Free Wi-Fi",
+        "32-inch LED TV",
+        "Daily Housekeeping",
+        "24/7 Power Backup"
+      ],
+      "description": "Comfortable and budget-friendly room with all essential amenities, spotless linen, and prompt room service for cozy single or couple stays.",
+      "status": "Available",
+      "featured": false
+    }
+  ],
+  "halls": [
+    {
+      "id": "hall-201",
+      "name": "Grand DRS Ballroom & Banquet",
+      "category": "Wedding & Grand Celebrations",
+      "tagline": "The Premier Destination for Royal Weddings & Grand Receptions",
+      "seatingCapacity": 350,
+      "floatingCapacity": 600,
+      "pricePerDay": 45000,
+      "pricePerPlate": 650,
+      "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80",
+      "suitableFor": [
+        "Weddings",
+        "Reception Parties",
+        "Sangeet & Mehendi",
+        "Grand Gala Dinners",
+        "Corporate Annual Meets"
+      ],
+      "facilities": [
+        "Centrally Air-Conditioned",
+        "Grand Elevated Stage (30x15 ft)",
+        "Thematic Chandelier & Mood Lighting",
+        "JBL Acoustic Line-Array Sound System",
+        "Dedicated Bridal Makeup Suite",
+        "Separate Buffet & Dining Arena",
+        "Full Generator Power Backup",
+        "Valet Parking for 100+ Cars"
+      ],
+      "description": "A magnificent pillarless banquet hall crowned with sparkling crystal chandeliers and state-of-the-art stage setups. Perfect for royal weddings, receptions, and unforgettable grand galas.",
+      "status": "Available"
+    },
+    {
+      "id": "hall-202",
+      "name": "Emerald Celebration Banquet",
+      "category": "Birthday & Party Hall",
+      "tagline": "Crafted for Birthdays, Anniversaries & Ring Ceremonies",
+      "seatingCapacity": 120,
+      "floatingCapacity": 200,
+      "pricePerDay": 18000,
+      "pricePerPlate": 499,
+      "image": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1200&q=80",
+      "suitableFor": [
+        "Birthday Parties",
+        "Anniversary Celebrations",
+        "Ring Ceremony / Engagement",
+        "Baby Shower",
+        "Kitty Parties"
+      ],
+      "facilities": [
+        "Party Laser & LED Moving Heads",
+        "DJ Console & Dance Floor",
+        "Customizable Balloon & Floral Decor Setup",
+        "High Quality Sound & Wireless Mics",
+        "Centrally Air Conditioned",
+        "Custom Cake Cutting Table & Stage",
+        "Live Food Counters Space"
+      ],
+      "description": "Vibrant and celebratory ambiance designed specially for birthday bashes, anniversary milestones, and ring ceremonies with integrated sound, DJ lights, and custom theme decor.",
+      "status": "Available"
+    },
+    {
+      "id": "hall-203",
+      "name": "Crystal Executive Conference Hall",
+      "category": "Corporate & Seminars",
+      "tagline": "Smart Business Venues for Conferences & Workshops",
+      "seatingCapacity": 75,
+      "floatingCapacity": 120,
+      "pricePerDay": 12000,
+      "pricePerPlate": 450,
+      "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80",
+      "suitableFor": [
+        "Corporate Meetings",
+        "Dealer Meets",
+        "Seminars & Training",
+        "Product Launches",
+        "Press Conferences"
+      ],
+      "facilities": [
+        "4K Motorized Projector & Screen",
+        "Podium with Collar & Cordless Mics",
+        "High-Speed Fiber Wi-Fi (150 Mbps)",
+        "Video Conferencing Equipment",
+        "Whiteboard & Flipcharts",
+        "Corporate Hi-Tea & Lunch Catering"
+      ],
+      "description": "A professional environment equipped with cutting-edge AV systems, motorized projection, and ergonomic executive seating for seminars, product launches, and business presentations.",
+      "status": "Available"
+    },
+    {
+      "id": "hall-204",
+      "name": "Skyline Open-Air Rooftop Terrace",
+      "category": "Open-Air Parties & Dinners",
+      "tagline": "Starlit Nights, DJ Vibes & Live Barbecue Celebrations",
+      "seatingCapacity": 150,
+      "floatingCapacity": 250,
+      "pricePerDay": 26000,
+      "pricePerPlate": 599,
+      "image": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=80",
+      "suitableFor": [
+        "Cocktail Evenings",
+        "Musical Nights & DJ Parties",
+        "Bachelor / Bachelorette Parties",
+        "Pre-Wedding Dinners",
+        "Corporate Mixers"
+      ],
+      "facilities": [
+        "Open Sky Starlit View with Weather Canopy",
+        "Fairy & Warm Filament Designer Lighting",
+        "DJ Dance Floor with Bass Surround",
+        "Live Barbecue & Mocktail Bar Setup",
+        "Lounge Sofa Seating & High Tables",
+        "Selfie & Photo Booth Backdrops"
+      ],
+      "description": "Breathtaking rooftop venue overlooking city lights, boasting warm fairy lights, energetic DJ sound setups, and live barbecue counters for vibrant evening gatherings.",
+      "status": "Available"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "BK-3122",
+      "type": "hall",
+      "itemId": null,
+      "itemTitle": "Grand DRS Ballroom",
+      "guestName": "Kunal Singhania",
+      "phone": "9898989898",
+      "email": "",
+      "checkIn": null,
+      "checkOut": null,
+      "eventDate": "2026-12-10",
+      "eventType": "Weddings & Reception",
+      "guestsCount": 500,
+      "roomsCount": 1,
+      "foodPreference": "Deluxe Veg & Non-Veg Buffet",
+      "totalAmount": 0,
+      "specialRequest": "Stage floral setup required.",
+      "status": "Pending",
+      "createdAt": "2026-11-18T17:18:42.372Z"
+    },
+    {
+      "id": "BK-1001",
+      "type": "room",
+      "itemId": "room-102",
+      "itemTitle": "Super Deluxe Room",
+      "guestName": "Rajesh Sharma",
+      "phone": "9876543210",
+      "email": "rajesh.sharma@example.com",
+      "checkIn": "2026-11-20",
+      "checkOut": "2026-11-22",
+      "guestsCount": 2,
+      "roomsCount": 1,
+      "totalAmount": 5998,
+      "status": "Confirmed",
+      "createdAt": "2026-11-18T10:15:00Z",
+      "specialRequest": "Early check-in requested at 10 AM, high floor preferred."
+    },
+    {
+      "id": "BK-1002",
+      "type": "hall",
+      "itemId": "hall-202",
+      "itemTitle": "Emerald Celebration Banquet",
+      "guestName": "Pooja Verma",
+      "phone": "9811223344",
+      "email": "pooja.v@example.com",
+      "eventDate": "2026-11-25",
+      "eventType": "Birthday Party",
+      "guestsCount": 85,
+      "foodPreference": "Veg & Non-Veg Buffet",
+      "totalAmount": 18000,
+      "status": "Pending",
+      "createdAt": "2026-11-18T14:30:00Z",
+      "specialRequest": "Daughter's 5th birthday, princess theme balloon decoration needed."
+    },
+    {
+      "id": "BK-1003",
+      "type": "hall",
+      "itemId": "hall-201",
+      "itemTitle": "Grand DRS Ballroom & Banquet",
+      "guestName": "Amitabh Choudhary",
+      "phone": "9431225588",
+      "email": "amitabh.c@example.com",
+      "eventDate": "2026-12-05",
+      "eventType": "Weddings & Reception",
+      "guestsCount": 400,
+      "foodPreference": "Royal Deluxe Buffet Catering",
+      "totalAmount": 45000,
+      "status": "Confirmed",
+      "createdAt": "2026-11-17T18:00:00Z",
+      "specialRequest": "Complete wedding arrangement, bridal suite required for 2 days."
+    }
+  ],
+  "partyPackages": [
+    {
+      "title": "Grand Wedding Package",
+      "eventType": "Weddings & Reception",
+      "price": "Starts ₹1,50,000",
+      "includes": [
+        "Grand Ballroom for 12 Hours",
+        "Stage & Royal Floral Mandap Decor",
+        "Bridal Luxury Suite Room",
+        "DJ & Surround Sound System",
+        "VIP Valet Parking",
+        "Generator Backup"
+      ]
+    },
+    {
+      "title": "Joyous Birthday Bash",
+      "eventType": "Birthday Parties",
+      "price": "Starts ₹25,000",
+      "includes": [
+        "Emerald Banquet (5 Hours)",
+        "Theme Balloon & LED Backdrop",
+        "DJ & Dance Floor with Lights",
+        "Cake Cutting Table Setup",
+        "Special Kids Play Area Corner"
+      ]
+    },
+    {
+      "title": "Corporate Conference Elite",
+      "eventType": "Corporate Events",
+      "price": "Starts ₹20,000",
+      "includes": [
+        "Crystal Conference Hall (8 Hours)",
+        "Projector & Sound Setup",
+        "Corporate Hi-Tea with Snacks",
+        "Notepads, Pens & High-Speed Wi-Fi",
+        "Dedicated AV Support Tech"
+      ]
+    },
+    {
+      "title": "Ring Ceremony & Anniversary",
+      "eventType": "Anniversaries & Engagements",
+      "price": "Starts ₹35,000",
+      "includes": [
+        "Banquet Hall Booking",
+        "Floral Stage & Ring Exchange Setup",
+        "Welcome Drinks Counter",
+        "Photography Lighting Setup",
+        "Complimentary Deluxe Room for Changing"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Dr. Sunil Kumar",
+      "role": "Hosted Daughter's Wedding",
+      "rating": 5,
+      "comment": "Hotel DRS Deluxe made my daughter's wedding utterly unforgettable! The Grand Ballroom was decorated like a palace, the food was delicious, and the hotel staff handled our 450+ guests effortlessly."
+    },
+    {
+      "name": "Vikram Singhania",
+      "role": "Corporate Regional Manager",
+      "rating": 5,
+      "comment": "Stayed in the Executive Business Suite for 3 days and held a dealer conference in the Crystal Hall. Excellent Wi-Fi, courteous staff, spotless rooms, and quick room service."
+    },
+    {
+      "name": "Sneha Roy",
+      "role": "1st Birthday Party Host",
+      "rating": 5,
+      "comment": "Booked the Emerald Banquet for my son's 1st birthday. The party lighting, balloon decoration, and music were fantastic. All our family and friends were thoroughly impressed!"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "gal-1795023553645",
+      "title": "Grand Chandelier Ballroom Night",
+      "category": "Party Halls",
+      "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gal-1",
+      "title": "Executive Suite Living Area",
+      "category": "Rooms",
+      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gal-2",
+      "title": "Grand Wedding Ballroom Setup",
+      "category": "Party Halls",
+      "image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gal-3",
+      "title": "Birthday & Anniversary Banquet",
+      "category": "Party Halls",
+      "image": "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gal-4",
+      "title": "Royal Presidential Suite Bed",
+      "category": "Rooms",
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gal-5",
+      "title": "Open-Air Rooftop Evening Party",
+      "category": "Party Halls",
+      "image": "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gal-6",
+      "title": "The DRS Spice & Grill Restaurant",
+      "category": "Dining",
+      "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gal-7",
+      "title": "Deluxe King Bed Room",
+      "category": "Rooms",
+      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "id": "gal-8",
+      "title": "Crystal Business Conference Hall",
+      "category": "Party Halls",
+      "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80"
+    }
+  ]
+}

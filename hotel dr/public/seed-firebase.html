@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Firestore Initializer | HOTEL DRS DELUXE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+</head>
+<body class="bg-[#0b1118] text-slate-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="glass-panel p-8 sm:p-10 rounded-2xl max-w-xl w-full border border-gold-500/40 shadow-2xl space-y-6">
+    
+    <div class="text-center space-y-2">
+      <div class="w-16 h-16 rounded-2xl gold-gradient-bg mx-auto flex items-center justify-center text-slate-950 font-serif font-black text-2xl shadow-lg shadow-gold-500/30">
+        🔥
+      </div>
+      <h1 class="font-serif text-2xl font-bold text-white tracking-wide">Firestore Database Seeder</h1>
+      <p class="text-xs text-gold-400 font-semibold uppercase tracking-wider">HOTEL DRS DELUXE &bull; project: hotel-drs-deluxe</p>
+    </div>
+
+    <div class="p-4 rounded-xl bg-[#121c27] border border-slate-700 text-xs space-y-2 text-slate-300">
+      <div class="flex items-center gap-2 text-emerald-400 font-bold">
+        <i class="fa-solid fa-circle-check"></i> Firebase Config Linked Successfully
+      </div>
+      <p class="leading-relaxed">
+        Click the button below to automatically push all pre-configured rooms (6 tiers), banquet & party halls (4 venues), photo gallery items, and hotel settings from your local setup into your <strong>Google Cloud Firestore</strong> collections.
+      </p>
+      <div class="text-[11px] text-slate-400 border-t border-slate-800 pt-2">
+        Target Collections: <code class="text-gold-300">settings</code>, <code class="text-gold-300">rooms</code>, <code class="text-gold-300">halls</code>, <code class="text-gold-300">gallery</code>
+      </div>
+    </div>
+
+    <!-- Status Output Box -->
+    <div id="seedLog" class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] font-mono text-slate-300 space-y-1 max-h-48 overflow-y-auto hidden">
+      <!-- Dynamic Logs -->
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="space-y-3">
+      <button id="seedBtn" onclick="startFirestoreSeed()" class="w-full btn-gold py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <span>Upload All Data to Firestore Now</span>
+      </button>
+
+      <div class="flex items-center justify-between text-xs pt-2">
+        <a href="/" class="text-slate-400 hover:text-gold-400 transition flex items-center gap-1">
+          <i class="fa-solid fa-arrow-left text-[10px]"></i> Hotel Website
+        </a>
+        <a href="/admin" class="text-gold-400 hover:underline flex items-center gap-1">
+          <i class="fa-solid fa-lock text-[10px]"></i> Admin Dashboard
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    async function startFirestoreSeed() {
+      const btn = document.getElementById('seedBtn');
+      const logBox = document.getElementById('seedLog');
+      logBox.classList.remove('hidden');
+      logBox.innerHTML = '';
+
+      function log(msg, color = 'text-slate-300') {
+        const line = document.createElement('div');
+        line.className = color;
+        line.innerHTML = `&gt; ${msg}`;
+        logBox.appendChild(line);
+        logBox.scrollTop = logBox.scrollHeight;
+      }
+
+      if (!window.db) {
+        log('❌ Error: Firestore client not initialized. Check firebase-config.js', 'text-red-400');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading to Firestore...';
+
+      try {
+        log('Reading hotel database from local server...', 'text-gold-300');
+        
+        // 1. Seed Settings
+        const settingsRes = await fetch('/api/settings');
+        const settingsData = await settingsRes.json();
+        if (settingsData.success && settingsData.settings) {
+          log('Uploading Hotel Settings...', 'text-slate-300');
+          await db.collection('settings').doc('general').set(settingsData.settings, { merge: true });
+          log('✅ Settings saved in firestore (settings/general)', 'text-emerald-400');
+        }
+
+        // 2. Seed Rooms
+        const roomsRes = await fetch('/api/rooms');
+        const roomsData = await roomsRes.json();
+        if (roomsData.success && roomsData.rooms) {
+          log(`Uploading ${roomsData.rooms.length} room categories...`, 'text-slate-300');
+          for (const room of roomsData.rooms) {
+            await db.collection('rooms').doc(room.id).set(room, { merge: true });
+            log(` &bull; Room saved: ${room.title} (₹${room.price})`, 'text-slate-400');
+          }
+          log('✅ All rooms populated in firestore (collection: rooms)', 'text-emerald-400');
+        }
+
+        // 3. Seed Banquet Halls
+        const hallsRes = await fetch('/api/halls');
+        const hallsData = await hallsRes.json();
+        if (hallsData.success && hallsData.halls) {
+          log(`Uploading ${hallsData.halls.length} banquet & party halls...`, 'text-slate-300');
+          for (const hall of hallsData.halls) {
+            await db.collection('halls').doc(hall.id).set(hall, { merge: true });
+            log(` &bull; Hall saved: ${hall.name}`, 'text-slate-400');
+          }
+          log('✅ All banquet halls populated in firestore (collection: halls)', 'text-emerald-400');
+        }
+
+        // 4. Seed Gallery
+        const galleryRes = await fetch('/api/gallery');
+        const galleryData = await galleryRes.json();
+        if (galleryData.success && galleryData.gallery) {
+          log(`Uploading ${galleryData.gallery.length} photo gallery images...`, 'text-slate-300');
+          for (const item of galleryData.gallery) {
+            await db.collection('gallery').doc(item.id).set(item, { merge: true });
+          }
+          log('✅ Gallery images populated in firestore (collection: gallery)', 'text-emerald-400');
+        }
+
+        log('🎉 ALL DATA MIGRATED TO FIRESTORE SUCCESSFULLY!', 'text-emerald-300 font-bold');
+        btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Migration Completed!';
+        btn.classList.remove('btn-gold');
+        btn.classList.add('bg-emerald-600', 'text-white');
+
+      } catch (err) {
+        console.error('Seeding error:', err);
+        log(`❌ Error: ${err.message}`, 'text-red-400 font-bold');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-rotate"></i> Retry Upload';
+      }
+    }
+  </script>
+
+</body>
+</html>

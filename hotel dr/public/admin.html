@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | HOTEL DRS DELUXE Control Center</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              400: '#e5cb8f',
+              500: '#c5a059',
+              600: '#9f7d38',
+              700: '#7a5e26',
+            },
+            hotel: {
+              dark: '#0b1118',
+              surface: '#121c27',
+              card: '#182433',
+              cardLight: '#213042',
+              border: 'rgba(197, 160, 89, 0.25)'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Luxury Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#0b1118] text-slate-100 antialiased min-h-screen">
+
+  <!-- ==================== LOGIN SCREEN (SHOWN WHEN NOT LOGGED IN) ==================== -->
+  <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#070b10] via-[#0b1118] to-[#121c27]">
+    <div class="glass-panel p-8 sm:p-10 rounded-2xl max-w-md w-full border border-gold-500/40 shadow-2xl relative">
+      
+      <!-- Brand Icon -->
+      <div class="text-center mb-6">
+        <div class="w-16 h-16 rounded-2xl gold-gradient-bg mx-auto flex items-center justify-center text-slate-950 font-serif font-black text-2xl shadow-lg shadow-gold-500/30 mb-3">
+          DRS
+        </div>
+        <h1 class="font-serif text-2xl font-bold text-white tracking-wide">HOTEL DRS DELUXE</h1>
+        <p class="text-xs text-gold-400 font-semibold tracking-widest uppercase mt-1">Admin Control Center</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="adminLoginForm" onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Admin Login Number</label>
+          <div class="relative">
+            <input type="text" id="adminLoginNo" required placeholder="Enter 10-digit Login Mobile No" autocomplete="off" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none pl-9">
+            <i class="fa-solid fa-phone text-slate-500 absolute left-3 top-3.5 text-xs"></i>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Password</label>
+          <div class="relative">
+            <input type="password" id="adminPassword" required placeholder="Enter Password" autocomplete="off" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none pl-9">
+            <i class="fa-solid fa-lock text-slate-500 absolute left-3 top-3.5 text-xs"></i>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full btn-gold py-3 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 mt-2">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Sign In to Dashboard</span>
+        </button>
+
+        <div class="text-center pt-2">
+          <a href="/" class="text-xs text-slate-400 hover:text-gold-400 transition flex items-center justify-center gap-1">
+            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            <span>Return to Hotel Website</span>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN ADMIN APPLICATION SHELL ==================== -->
+  <div id="adminApp" class="hidden min-h-screen flex flex-col lg:flex-row">
+    
+    <!-- Sidebar -->
+    <aside class="w-full lg:w-64 bg-[#070b10] border-r border-slate-800 lg:min-h-screen flex flex-col justify-between p-4 shrink-0">
+      <div>
+        <!-- Brand Header -->
+        <div class="flex items-center space-x-3 px-2 py-4 mb-6 border-b border-slate-800">
+          <div class="w-10 h-10 rounded-lg gold-gradient-bg flex items-center justify-center text-slate-950 font-serif font-black text-lg">
+            DRS
+          </div>
+          <div>
+            <h2 class="font-serif font-bold text-sm text-white leading-tight">HOTEL DRS DELUXE</h2>
+            <span class="text-[10px] text-gold-400 font-semibold uppercase tracking-wider">Control Panel</span>
+          </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="space-y-1.5 text-xs font-semibold">
+          <button onclick="switchTab('dashboard')" id="tabBtn-dashboard" class="admin-nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-gold-400 bg-gold-500/10 border border-gold-500/30 transition">
+            <i class="fa-solid fa-chart-pie w-4 text-center"></i>
+            <span>Dashboard Overview</span>
+          </button>
+          
+          <button onclick="switchTab('rooms')" id="tabBtn-rooms" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+            <i class="fa-solid fa-bed w-4 text-center"></i>
+            <span>Rooms Management</span>
+          </button>
+
+          <button onclick="switchTab('halls')" id="tabBtn-halls" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+            <i class="fa-solid fa-champagne-glasses w-4 text-center"></i>
+            <span>Party Halls &amp; Banquets</span>
+          </button>
+
+          <button onclick="switchTab('bookings')" id="tabBtn-bookings" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+            <i class="fa-solid fa-calendar-check w-4 text-center"></i>
+            <span>Bookings &amp; Inquiries</span>
+          </button>
+
+          <button onclick="switchTab('gallery')" id="tabBtn-gallery" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+            <i class="fa-solid fa-images w-4 text-center"></i>
+            <span>Photo Gallery</span>
+          </button>
+
+          <button onclick="switchTab('settings')" id="tabBtn-settings" class="admin-nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+            <i class="fa-solid fa-palette w-4 text-center"></i>
+            <span>Theme &amp; Settings</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Bottom User / Logout Bar -->
+      <div class="pt-4 border-t border-slate-800 space-y-2">
+        <a href="/" target="_blank" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition">
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <span>View Live Website</span>
+        </a>
+
+        <div class="p-2.5 rounded-xl bg-[#121c27] border border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2 overflow-hidden">
+            <div class="w-7 h-7 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center text-xs shrink-0">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div class="truncate text-[11px]">
+              <span class="block font-bold text-white">Admin</span>
+              <span class="text-slate-400">8292749943</span>
+            </div>
+          </div>
+          <button onclick="handleAdminLogout()" class="text-slate-400 hover:text-red-400 text-sm p-1" title="Sign Out">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+      
+      <!-- Top Bar -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800 mb-8">
+        <div>
+          <h1 id="pageTitle" class="font-serif text-2xl font-bold text-white">Dashboard Overview</h1>
+          <p id="pageDescription" class="text-xs text-slate-400 mt-1">Real-time stats, bookings, and control center for Hotel DRS Deluxe.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="refreshData()" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center gap-1.5 transition">
+            <i class="fa-solid fa-rotate"></i>
+            <span>Refresh</span>
+          </button>
+          <a href="/seed-firebase.html" target="_blank" class="px-3 py-2 rounded-lg bg-amber-500/20 text-amber-300 hover:bg-amber-500 hover:text-black text-xs font-semibold flex items-center gap-1.5 transition" title="Upload local rooms & settings to Google Cloud Firestore">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span class="hidden sm:inline">Sync Firestore</span>
+          </a>
+          <a href="/" target="_blank" class="btn-gold px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5">
+            <i class="fa-solid fa-globe"></i>
+            <span>Preview Site</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 1: DASHBOARD OVERVIEW ==================== -->
+      <section id="view-dashboard" class="space-y-8">
+        
+        <!-- Metrics Cards Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div class="glass-panel p-4 rounded-xl border border-slate-800">
+            <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Total Rooms</div>
+            <div id="statTotalRooms" class="text-2xl font-serif font-bold text-white mt-1">0</div>
+            <div class="text-[10px] text-emerald-400 mt-1"><i class="fa-solid fa-check"></i> All Tiers</div>
+          </div>
+
+          <div class="glass-panel p-4 rounded-xl border border-slate-800">
+            <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Available Rooms</div>
+            <div id="statAvailableRooms" class="text-2xl font-serif font-bold text-emerald-400 mt-1">0</div>
+            <div class="text-[10px] text-slate-400 mt-1">Ready for check-in</div>
+          </div>
+
+          <div class="glass-panel p-4 rounded-xl border border-slate-800">
+            <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Party Halls</div>
+            <div id="statTotalHalls" class="text-2xl font-serif font-bold text-gold-400 mt-1">0</div>
+            <div class="text-[10px] text-slate-400 mt-1">Wedding &amp; Parties</div>
+          </div>
+
+          <div class="glass-panel p-4 rounded-xl border border-slate-800">
+            <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Total Bookings</div>
+            <div id="statTotalBookings" class="text-2xl font-serif font-bold text-white mt-1">0</div>
+            <div class="text-[10px] text-slate-400 mt-1">Rooms &amp; Banquets</div>
+          </div>
+
+          <div class="glass-panel p-4 rounded-xl border border-slate-800">
+            <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Pending Inquiries</div>
+            <div id="statPendingInquiries" class="text-2xl font-serif font-bold text-amber-400 mt-1">0</div>
+            <div class="text-[10px] text-amber-400 mt-1">Needs Attention</div>
+          </div>
+
+          <div class="glass-panel p-4 rounded-xl border border-slate-800">
+            <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Confirmed Revenue</div>
+            <div id="statEstimatedRevenue" class="text-2xl font-serif font-bold text-emerald-400 mt-1">₹0</div>
+            <div class="text-[10px] text-slate-400 mt-1">Confirmed bookings</div>
+          </div>
+        </div>
+
+        <!-- Quick Action Shortcuts -->
+        <div class="glass-panel p-5 rounded-2xl border border-gold-500/20 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h3 class="font-serif text-base font-bold text-white">Hotel DRS Deluxe Quick Operations</h3>
+            <p class="text-xs text-slate-400">Add new inventory, create walk-in reservations, or adjust banquet rates.</p>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <button onclick="openAddRoomModal()" class="btn-gold px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-plus"></i>
+              <span>Add New Room</span>
+            </button>
+            <button onclick="openAddHallModal()" class="btn-outline-gold px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5">
+              <i class="fa-solid fa-champagne-glasses"></i>
+              <span>Add Party Hall</span>
+            </button>
+            <button onclick="openManualBookingModal()" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition">
+              <i class="fa-solid fa-calendar-plus text-gold-400"></i>
+              <span>Walk-In Reservation</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Recent Inquiries & Bookings Feed -->
+        <div class="glass-panel rounded-2xl border border-slate-800 p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="font-serif text-base font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-clock-rotate-left text-gold-400"></i>
+              <span>Recent Bookings &amp; Party Inquiries</span>
+            </h3>
+            <button onclick="switchTab('bookings')" class="text-xs text-gold-400 hover:underline">View All &rarr;</button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[#182433] text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                <tr>
+                  <th class="p-3">ID</th>
+                  <th class="p-3">Type</th>
+                  <th class="p-3">Guest / Client</th>
+                  <th class="p-3">Item / Service</th>
+                  <th class="p-3">Dates / Details</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardRecentBookingsTable" class="divide-y divide-slate-800">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 2: ROOMS MANAGEMENT ==================== -->
+      <section id="view-rooms" class="hidden space-y-6">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-serif text-xl font-bold text-white">Manage Hotel Rooms &amp; Suites</h2>
+            <p class="text-xs text-slate-400">Add, edit pricing, change amenities, and toggle room availability.</p>
+          </div>
+          <button onclick="openAddRoomModal()" class="btn-gold px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-2 shadow-lg">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add New Room</span>
+          </button>
+        </div>
+
+        <!-- Rooms List Table / Grid -->
+        <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[#182433] text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                <tr>
+                  <th class="p-3.5">Room</th>
+                  <th class="p-3.5">Category</th>
+                  <th class="p-3.5">Price / Night</th>
+                  <th class="p-3.5">Capacity &amp; Bed</th>
+                  <th class="p-3.5">Status</th>
+                  <th class="p-3.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminRoomsTableBody" class="divide-y divide-slate-800">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 3: PARTY HALLS & BANQUETS ==================== -->
+      <section id="view-halls" class="hidden space-y-6">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-serif text-xl font-bold text-white">Party Halls &amp; Banquet Arrangements</h2>
+            <p class="text-xs text-slate-400">Manage wedding banquet halls, birthday venues, pricing, and catering packages.</p>
+          </div>
+          <button onclick="openAddHallModal()" class="btn-gold px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-2 shadow-lg">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Party Hall</span>
+          </button>
+        </div>
+
+        <!-- Halls List Table / Grid -->
+        <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[#182433] text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                <tr>
+                  <th class="p-3.5">Hall / Venue</th>
+                  <th class="p-3.5">Category</th>
+                  <th class="p-3.5">Capacity</th>
+                  <th class="p-3.5">Pricing</th>
+                  <th class="p-3.5">Suitable For</th>
+                  <th class="p-3.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminHallsTableBody" class="divide-y divide-slate-800">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 4: BOOKINGS & INQUIRIES ==================== -->
+      <section id="view-bookings" class="hidden space-y-6">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-serif text-xl font-bold text-white">All Bookings &amp; Inquiries</h2>
+            <p class="text-xs text-slate-400">Manage incoming room reservations and party hall inquiries.</p>
+          </div>
+          <button onclick="openManualBookingModal()" class="btn-gold px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-2 shadow-lg">
+            <i class="fa-solid fa-calendar-plus"></i>
+            <span>Add Walk-In / Phone Booking</span>
+          </button>
+        </div>
+
+        <!-- Filters Bar -->
+        <div class="glass-panel p-4 rounded-xl border border-slate-800 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-slate-400 font-semibold">Filter Type:</span>
+            <select id="filterBookingType" onchange="filterBookings()" class="bg-[#182433] border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none">
+              <option value="">All Types (Rooms &amp; Halls)</option>
+              <option value="room">Hotel Room Stays</option>
+              <option value="hall">Party Halls &amp; Banquets</option>
+            </select>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-slate-400 font-semibold">Status:</span>
+            <select id="filterBookingStatus" onchange="filterBookings()" class="bg-[#182433] border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none">
+              <option value="All">All Statuses</option>
+              <option value="Pending">Pending</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Cancelled">Cancelled</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Bookings Full Table -->
+        <div class="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-[#182433] text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+                <tr>
+                  <th class="p-3.5">ID &amp; Type</th>
+                  <th class="p-3.5">Guest / Contact</th>
+                  <th class="p-3.5">Reserved Item / Event</th>
+                  <th class="p-3.5">Dates &amp; Details</th>
+                  <th class="p-3.5">Special Requests</th>
+                  <th class="p-3.5">Status</th>
+                  <th class="p-3.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="adminBookingsTableBody" class="divide-y divide-slate-800">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== TAB 5: PHOTO GALLERY ==================== -->
+      <section id="view-gallery" class="hidden space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="font-serif text-xl font-bold text-white">Hotel Photo Gallery Management</h2>
+            <p class="text-xs text-slate-400">Add, view, and remove photos displayed in the website's gallery.</p>
+          </div>
+          <button onclick="openAddGalleryModal()" class="btn-gold px-4 py-2.5 rounded-lg text-xs font-bold flex items-center gap-2 shadow-lg">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Gallery Photo</span>
+          </button>
+        </div>
+
+        <div id="adminGalleryGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- ==================== TAB 6: HOTEL SETTINGS, THEME & MAPS ==================== -->
+      <section id="view-settings" class="hidden space-y-6">
+        
+        <div class="max-w-4xl">
+          <h2 class="font-serif text-xl font-bold text-white mb-1">Hotel Profile, Theme &amp; Location Control</h2>
+          <p class="text-xs text-slate-400 mb-6">Customize website theme colors, Google Maps location, contact numbers, and policies.</p>
+
+          <form onsubmit="handleSaveSettings(event)" class="glass-panel p-6 sm:p-8 rounded-2xl border border-slate-800 space-y-6">
+            
+            <!-- THEME PALETTE SELECTOR -->
+            <div class="p-4 rounded-xl bg-[#182433] border border-slate-700">
+              <label class="block text-xs font-bold text-gold-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                <i class="fa-solid fa-palette"></i> 1. Website Luxury Theme Palette
+              </label>
+              <p class="text-xs text-slate-400 mb-4">Select the primary luxury color scheme for the public hotel website:</p>
+              
+              <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3" id="themeSelectorGrid">
+                <!-- Theme 1 -->
+                <label class="cursor-pointer border border-slate-700 hover:border-gold-500 rounded-xl p-3 text-center transition block bg-[#121c27] relative theme-radio-card" onclick="previewTheme('royal-gold')">
+                  <input type="radio" name="hotelTheme" value="royal-gold" class="sr-only">
+                  <div class="w-8 h-8 mx-auto rounded-full mb-2 border border-amber-400 shadow-md" style="background: linear-gradient(135deg, #fcebc2, #c5a059, #9a7833);"></div>
+                  <div class="text-xs font-bold text-white">Royal Gold</div>
+                  <div class="text-[10px] text-slate-400">Classic Luxury</div>
+                </label>
+
+                <!-- Theme 2 -->
+                <label class="cursor-pointer border border-slate-700 hover:border-emerald-500 rounded-xl p-3 text-center transition block bg-[#121c27] relative theme-radio-card" onclick="previewTheme('emerald-palace')">
+                  <input type="radio" name="hotelTheme" value="emerald-palace" class="sr-only">
+                  <div class="w-8 h-8 mx-auto rounded-full mb-2 border border-emerald-400 shadow-md" style="background: linear-gradient(135deg, #a7f3d0, #10b981, #047857);"></div>
+                  <div class="text-xs font-bold text-white">Emerald</div>
+                  <div class="text-[10px] text-slate-400">Heritage Royal</div>
+                </label>
+
+                <!-- Theme 3 -->
+                <label class="cursor-pointer border border-slate-700 hover:border-rose-500 rounded-xl p-3 text-center transition block bg-[#121c27] relative theme-radio-card" onclick="previewTheme('ruby-deluxe')">
+                  <input type="radio" name="hotelTheme" value="ruby-deluxe" class="sr-only">
+                  <div class="w-8 h-8 mx-auto rounded-full mb-2 border border-rose-400 shadow-md" style="background: linear-gradient(135deg, #ffe4e6, #e11d48, #9f1239);"></div>
+                  <div class="text-xs font-bold text-white">Ruby Deluxe</div>
+                  <div class="text-[10px] text-slate-400">Celebration Red</div>
+                </label>
+
+                <!-- Theme 4 -->
+                <label class="cursor-pointer border border-slate-700 hover:border-blue-500 rounded-xl p-3 text-center transition block bg-[#121c27] relative theme-radio-card" onclick="previewTheme('sapphire-midnight')">
+                  <input type="radio" name="hotelTheme" value="sapphire-midnight" class="sr-only">
+                  <div class="w-8 h-8 mx-auto rounded-full mb-2 border border-blue-400 shadow-md" style="background: linear-gradient(135deg, #dbeafe, #3b82f6, #1d4ed8);"></div>
+                  <div class="text-xs font-bold text-white">Sapphire</div>
+                  <div class="text-[10px] text-slate-400">Midnight Modern</div>
+                </label>
+
+                <!-- Theme 5 -->
+                <label class="cursor-pointer border border-slate-700 hover:border-pink-500 rounded-xl p-3 text-center transition block bg-[#121c27] relative theme-radio-card" onclick="previewTheme('rose-gold')">
+                  <input type="radio" name="hotelTheme" value="rose-gold" class="sr-only">
+                  <div class="w-8 h-8 mx-auto rounded-full mb-2 border border-pink-400 shadow-md" style="background: linear-gradient(135deg, #fdf2f8, #f472b6, #be185d);"></div>
+                  <div class="text-xs font-bold text-white">Rose Gold</div>
+                  <div class="text-[10px] text-slate-400">Romantic Chic</div>
+                </label>
+
+                <!-- Theme 6 -->
+                <label class="cursor-pointer border border-slate-700 hover:border-amber-500 rounded-xl p-3 text-center transition block bg-[#121c27] relative theme-radio-card" onclick="previewTheme('royal-amber')">
+                  <input type="radio" name="hotelTheme" value="royal-amber" class="sr-only">
+                  <div class="w-8 h-8 mx-auto rounded-full mb-2 border border-amber-400 shadow-md" style="background: linear-gradient(135deg, #fbbf24, #f59e0b, #b45309);"></div>
+                  <div class="text-xs font-bold text-white">Amber Gold</div>
+                  <div class="text-[10px] text-slate-400">Warm Glow</div>
+                </label>
+
+                <!-- Theme 7 -->
+                <label class="cursor-pointer border border-slate-700 hover:border-violet-500 rounded-xl p-3 text-center transition block bg-[#121c27] relative theme-radio-card" onclick="previewTheme('royal-violet')">
+                  <input type="radio" name="hotelTheme" value="royal-violet" class="sr-only">
+                  <div class="w-8 h-8 mx-auto rounded-full mb-2 border border-violet-400 shadow-md" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6, #6d28d9);"></div>
+                  <div class="text-xs font-bold text-white">Royal Violet</div>
+                  <div class="text-[10px] text-slate-400">Imperial Aura</div>
+                </label>
+              </div>
+            </div>
+
+            <!-- TYPOGRAPHY & GOLDEN FONTS CUSTOMIZER -->
+            <div class="p-4 rounded-xl bg-[#182433] border border-slate-700 space-y-4">
+              <label class="block text-xs font-bold text-gold-400 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-font"></i> 2. Luxury Golden Typography &amp; Font Styling
+              </label>
+              <p class="text-xs text-slate-400">Change heading font, golden gradient styling, and content body typography in real time:</p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">
+                    Heading / Golden Font Family <span class="text-gold-400">*</span>
+                  </label>
+                  <select id="settingHeadingFont" onchange="updateLiveFontPreview()" class="w-full bg-[#121c27] border border-slate-700 rounded-lg px-3 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+                    <option value="Cinzel">Cinzel (Royal Roman Classic)</option>
+                    <option value="Playfair Display">Playfair Display (Editorial Elegance)</option>
+                    <option value="Cormorant Garamond">Cormorant Garamond (Aristocratic Luxury)</option>
+                    <option value="Montserrat">Montserrat (Bold Prestige)</option>
+                    <option value="Poppins">Poppins (Modern Clean)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">
+                    Body &amp; Paragraph Font <span class="text-gold-400">*</span>
+                  </label>
+                  <select id="settingBodyFont" onchange="updateLiveFontPreview()" class="w-full bg-[#121c27] border border-slate-700 rounded-lg px-3 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+                    <option value="Plus Jakarta Sans">Plus Jakarta Sans (Ultra Modern)</option>
+                    <option value="Inter">Inter (Crisp &amp; Minimalist)</option>
+                    <option value="Poppins">Poppins (Smooth Geometric)</option>
+                    <option value="Montserrat">Montserrat (Sophisticated)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">
+                    Golden Font Gradient Accent <span class="text-gold-400">*</span>
+                  </label>
+                  <select id="settingGoldStyle" onchange="updateLiveFontPreview()" class="w-full bg-[#121c27] border border-slate-700 rounded-lg px-3 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+                    <option value="champagne">Champagne Gold (Warm &amp; Rich)</option>
+                    <option value="pure-gold">24K Pure Yellow Gold (Bullion)</option>
+                    <option value="rose-gold">Rose Gold (Blush Metallic)</option>
+                    <option value="platinum-gold">Platinum White Gold (Ice Silver)</option>
+                    <option value="antique-bronze">Antique Bronze Gold (Heritage)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Real-time Font Preview Banner -->
+              <div class="mt-3 p-4 rounded-xl bg-[#0b1118] border border-gold-500/30 text-center">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-slate-500 block mb-1">Live Font &amp; Golden Title Preview</span>
+                <h3 id="adminFontPreviewTitle" class="text-2xl font-bold font-serif gold-gradient-text tracking-wide transition-all duration-200">
+                  HOTEL DRS DELUXE
+                </h3>
+                <p id="adminFontPreviewSubtitle" class="text-xs text-slate-300 mt-1 transition-all duration-200">
+                  Exquisite Rooms, Grand Banquets &amp; Luxury Celebrations
+                </p>
+              </div>
+            </div>
+
+            <!-- GOOGLE MAPS LOCATION BUTTON ONLY CONTROL -->
+            <div class="p-4 rounded-xl bg-[#182433] border border-slate-700 space-y-4">
+              <div class="flex items-center justify-between">
+                <label class="text-xs font-bold text-gold-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <i class="fa-solid fa-map-location-dot"></i> 3. Google Maps Location Button Control
+                </label>
+                <button type="button" onclick="autoGenerateMapUrls()" class="px-2.5 py-1 rounded bg-gold-500/20 text-gold-400 hover:bg-gold-500 hover:text-black font-semibold text-[11px] transition">
+                  <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Auto-Generate Link from Address
+                </button>
+              </div>
+
+              <p class="text-xs text-slate-400">
+                The public website displays an interactive <strong class="text-gold-400 font-semibold">"Open in Google Maps"</strong> button (no heavy map iframe). Update the button's destination link below:
+              </p>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Google Maps Button Destination Link *</label>
+                <div class="flex gap-2">
+                  <input type="url" id="settingGoogleMapsUrl" required placeholder="https://maps.google.com/?q=Hotel+DRS+Deluxe+Station+Road" class="flex-1 bg-[#121c27] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none font-mono">
+                  <a id="adminTestMapLink" href="https://maps.google.com/?q=Hotel+DRS+Deluxe+Station+Road" target="_blank" class="px-3.5 py-2 rounded-lg bg-gold-500/20 text-gold-400 hover:bg-gold-500 hover:text-black text-xs font-bold flex items-center gap-1.5 transition shrink-0">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    <span>Test Link</span>
+                  </a>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-1">This link opens Google Maps app or website directly for live GPS navigation when clicked by guests.</p>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Hotel Physical Address *</label>
+                <textarea id="settingAddress" rows="2" class="w-full bg-[#121c27] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none"></textarea>
+              </div>
+            </div>
+
+            <!-- BASIC INFO -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Hotel Name</label>
+                <input type="text" id="settingHotelName" required class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Tagline</label>
+                <input type="text" id="settingTagline" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Primary Phone / Login No</label>
+                <input type="text" id="settingPhone" required value="8292749943" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">WhatsApp Number</label>
+                <input type="text" id="settingWhatsapp" required value="8292749943" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Standard Check-In Time</label>
+                <input type="text" id="settingCheckIn" value="12:00 PM" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Standard Check-Out Time</label>
+                <input type="text" id="settingCheckOut" value="11:00 AM" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">
+                Top Announcement Bar Text <span class="text-gold-400 font-normal">(Visible on website banner)</span>
+              </label>
+              <textarea id="settingAnnouncement" rows="2" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3.5 py-2.5 text-xs text-white focus:border-gold-500 focus:outline-none"></textarea>
+            </div>
+
+            <!-- ADMIN LOGIN & SECURITY CREDENTIALS -->
+            <div class="p-4 rounded-xl bg-[#182433] border border-amber-500/30 space-y-3">
+              <label class="block text-xs font-bold text-gold-400 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-user-shield"></i> 4. Change Admin Login &amp; Password
+              </label>
+              <p class="text-xs text-slate-400">Change your private admin login credentials. Leave password blank if you do not wish to change it.</p>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">Admin Login Number</label>
+                  <input type="text" id="settingAdminLoginNo" placeholder="8292749943" class="w-full bg-[#121c27] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1">New Password (leave blank to keep current)</label>
+                  <input type="password" id="settingAdminNewPassword" placeholder="Enter new password" class="w-full bg-[#121c27] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-gold px-6 py-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-lg">
+              <i class="fa-solid fa-floppy-disk"></i>
+              <span>Save &amp; Update Settings</span>
+            </button>
+
+          </form>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ==================== ROOM MODAL (ADD / EDIT) ==================== -->
+  <div id="roomModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal-overlay">
+    <div class="bg-hotel-surface border border-gold-500/30 rounded-2xl max-w-xl w-full p-6 sm:p-8 modal-content max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+        <h3 id="roomModalTitle" class="font-serif text-lg font-bold text-white">Add New Room</h3>
+        <button onclick="closeAdminModal('roomModal')" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="roomForm" onsubmit="handleSaveRoom(event)" class="space-y-4">
+        <input type="hidden" id="roomFormId">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Room Title *</label>
+            <input type="text" id="rfTitle" required placeholder="e.g. Royal Deluxe King Room" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Category *</label>
+            <select id="rfCategory" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+              <option value="Deluxe">Deluxe Room</option>
+              <option value="Super Deluxe">Super Deluxe</option>
+              <option value="Executive Suite">Executive Business Suite</option>
+              <option value="Presidential">Royal Presidential Suite</option>
+              <option value="Family Suite">Family Luxury Suite</option>
+              <option value="Classic">Standard Classic Room</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Price / Night (₹) *</label>
+            <input type="number" id="rfPrice" required min="100" placeholder="2500" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Original Price (₹)</label>
+            <input type="number" id="rfOriginalPrice" min="100" placeholder="3200" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Max Guests</label>
+            <input type="number" id="rfMaxGuests" min="1" max="10" value="2" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Bed Type</label>
+            <input type="text" id="rfBedType" value="King Size Bed" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Room Size</label>
+            <input type="text" id="rfSize" value="320 sq.ft" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">View</label>
+            <input type="text" id="rfView" value="City View" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Photo Image URL *</label>
+          <input type="url" id="rfImage" required placeholder="https://..." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          
+          <!-- Image Presets Quick Select -->
+          <div class="flex items-center gap-2 mt-1.5 text-[10px] text-slate-400">
+            <span>Presets:</span>
+            <button type="button" onclick="setRoomPresetImage(0)" class="text-gold-400 hover:underline">Deluxe</button>
+            <button type="button" onclick="setRoomPresetImage(1)" class="text-gold-400 hover:underline">Super Deluxe</button>
+            <button type="button" onclick="setRoomPresetImage(2)" class="text-gold-400 hover:underline">Suite</button>
+            <button type="button" onclick="setRoomPresetImage(3)" class="text-gold-400 hover:underline">Presidential</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Amenities (comma-separated)</label>
+          <input type="text" id="rfAmenities" placeholder="Air Conditioning, Free Wi-Fi, 4K TV, 24/7 Room Service, Breakfast" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Description</label>
+          <textarea id="rfDescription" rows="2.5" placeholder="Description of the room..." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Status</label>
+            <select id="rfStatus" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+              <option value="Available">Available</option>
+              <option value="Booked">Booked</option>
+              <option value="Maintenance">Maintenance</option>
+            </select>
+          </div>
+          <div class="flex items-center pt-5">
+            <label class="flex items-center gap-2 text-xs text-slate-300 cursor-pointer">
+              <input type="checkbox" id="rfFeatured" class="rounded bg-[#182433] border-slate-700 text-gold-500 focus:ring-0">
+              <span>Show in Featured Section</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="submit" class="flex-1 btn-gold py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+            Save Room Details
+          </button>
+          <button type="button" onclick="closeAdminModal('roomModal')" class="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== HALL MODAL (ADD / EDIT) ==================== -->
+  <div id="hallModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal-overlay">
+    <div class="bg-hotel-surface border border-gold-500/30 rounded-2xl max-w-xl w-full p-6 sm:p-8 modal-content max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+        <h3 id="hallModalTitle" class="font-serif text-lg font-bold text-white">Add Banquet / Party Hall</h3>
+        <button onclick="closeAdminModal('hallModal')" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="hallForm" onsubmit="handleSaveHall(event)" class="space-y-4">
+        <input type="hidden" id="hallFormId">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Hall Name *</label>
+            <input type="text" id="hfName" required placeholder="e.g. Royal Sapphire Banquet" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Category *</label>
+            <input type="text" id="hfCategory" required placeholder="e.g. Wedding & Grand Parties" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Tagline</label>
+          <input type="text" id="hfTagline" placeholder="e.g. The Premier Destination for Royal Weddings" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Seating Cap *</label>
+            <input type="number" id="hfSeatingCapacity" required min="10" placeholder="200" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Floating Cap *</label>
+            <input type="number" id="hfFloatingCapacity" required min="10" placeholder="350" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Price/Day (₹) *</label>
+            <input type="number" id="hfPricePerDay" required min="1000" placeholder="35000" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Price/Plate (₹)</label>
+            <input type="number" id="hfPricePerPlate" min="100" placeholder="550" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Photo Image URL *</label>
+          <input type="url" id="hfImage" required placeholder="https://..." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          <div class="flex items-center gap-2 mt-1.5 text-[10px] text-slate-400">
+            <span>Presets:</span>
+            <button type="button" onclick="setHallPresetImage(0)" class="text-gold-400 hover:underline">Grand Ballroom</button>
+            <button type="button" onclick="setHallPresetImage(1)" class="text-gold-400 hover:underline">Birthday Banquet</button>
+            <button type="button" onclick="setHallPresetImage(2)" class="text-gold-400 hover:underline">Conference Hall</button>
+            <button type="button" onclick="setHallPresetImage(3)" class="text-gold-400 hover:underline">Rooftop Terrace</button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Suitable Events (comma-separated)</label>
+          <input type="text" id="hfSuitableFor" placeholder="Weddings, Birthday Parties, Anniversaries, Corporate Meets, DJ Nights" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Facilities &amp; Arrangements (comma-separated)</label>
+          <input type="text" id="hfFacilities" placeholder="Air Conditioned, Elevated Stage, JBL Sound System, DJ Lights, Bridal Suite, Valet Parking" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Description</label>
+          <textarea id="hfDescription" rows="2.5" placeholder="Description of the banquet hall..." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="submit" class="flex-1 btn-gold py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+            Save Hall Details
+          </button>
+          <button type="button" onclick="closeAdminModal('hallModal')" class="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MANUAL BOOKING MODAL ==================== -->
+  <div id="manualBookingModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal-overlay">
+    <div class="bg-hotel-surface border border-gold-500/30 rounded-2xl max-w-lg w-full p-6 sm:p-8 modal-content max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-5">
+        <h3 class="font-serif text-lg font-bold text-white">Create Walk-In / Phone Reservation</h3>
+        <button onclick="closeAdminModal('manualBookingModal')" class="text-slate-400 hover:text-white text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleManualBooking(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Reservation Type</label>
+          <select id="mbType" onchange="toggleManualBookingFields()" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+            <option value="room">🏨 Room Reservation</option>
+            <option value="hall">🎉 Banquet &amp; Party Hall Booking</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Select Item</label>
+          <select id="mbItemSelect" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Guest Name *</label>
+            <input type="text" id="mbGuestName" required placeholder="Full Name" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Phone Number *</label>
+            <input type="tel" id="mbPhone" required placeholder="Mobile Number" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div id="mbRoomDatesGrid" class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Check-In *</label>
+            <input type="date" id="mbCheckIn" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Check-Out *</label>
+            <input type="date" id="mbCheckOut" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div id="mbHallDatesGrid" class="hidden grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Event Date *</label>
+            <input type="date" id="mbEventDate" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Event Type</label>
+            <input type="text" id="mbEventType" placeholder="Wedding / Birthday / Party" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Total Amount (₹)</label>
+            <input type="number" id="mbTotalAmount" placeholder="3000" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Initial Status</label>
+            <select id="mbStatus" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+              <option value="Confirmed" selected>Confirmed</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Notes / Special Requests</label>
+          <textarea id="mbSpecialRequest" rows="2" placeholder="Guest preferences, advance paid, etc." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none"></textarea>
+        </div>
+
+        <div class="pt-3 flex gap-3">
+          <button type="submit" class="flex-1 btn-gold py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+            Record Reservation
+          </button>
+          <button type="button" onclick="closeAdminModal('manualBookingModal')" class="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== GALLERY MODAL (ADD PHOTO) ==================== -->
+  <div id="galleryModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm modal-overlay">
+    <div class="bg-hotel-surface border border-gold-500/30 rounded-2xl max-w-md w-full p-6 modal-content">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <h3 class="font-serif text-base font-bold text-white">Add Photo to Gallery</h3>
+        <button onclick="closeAdminModal('galleryModal')" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleSaveGalleryPhoto(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Photo Title *</label>
+          <input type="text" id="gfTitle" required placeholder="e.g. Royal Banquet Flower Mandap" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Category *</label>
+          <select id="gfCategory" class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+            <option value="Rooms">Rooms &amp; Suites</option>
+            <option value="Party Halls" selected>Party Halls &amp; Banquets</option>
+            <option value="Dining">Dining &amp; Restaurant</option>
+            <option value="Lobby">Lobby &amp; Exterior</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Image URL *</label>
+          <input type="url" id="gfImage" required placeholder="https://..." class="w-full bg-[#182433] border border-slate-700 rounded-lg px-3 py-2 text-xs text-white focus:border-gold-500 focus:outline-none">
+          <div class="flex items-center gap-2 mt-1.5 text-[10px] text-slate-400">
+            <span>Presets:</span>
+            <button type="button" onclick="setGalleryPreset(0)" class="text-gold-400 hover:underline">Wedding</button>
+            <button type="button" onclick="setGalleryPreset(1)" class="text-gold-400 hover:underline">Birthday</button>
+            <button type="button" onclick="setGalleryPreset(2)" class="text-gold-400 hover:underline">Suite</button>
+            <button type="button" onclick="setGalleryPreset(3)" class="text-gold-400 hover:underline">Dining</button>
+          </div>
+        </div>
+
+        <div class="pt-2 flex gap-3">
+          <button type="submit" class="flex-1 btn-gold py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider">
+            Upload to Gallery
+          </button>
+          <button type="button" onclick="closeAdminModal('galleryModal')" class="px-4 py-2.5 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs & Client Config -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+
+  <!-- Admin JavaScript Logic -->
+  <script src="admin.js"></script>
+</body>
+</html>
